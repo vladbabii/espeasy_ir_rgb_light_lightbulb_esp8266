@@ -1,0 +1,51 @@
+on action#color do
+  if [action#color]=0
+
+  elseif [action#color]=1
+    IRSEND,'{'protocol':'NEC','data':'0xFFC03F','bits':32}'
+  elseif [action#color]=2
+    IRSEND,'{'protocol':'NEC','data':'0xFF10EF','bits':32}'
+  elseif [action#color]=3
+    IRSEND,'{'protocol':'NEC','data':'0xFF906F','bits':32}'
+  elseif [action#color]=4
+    IRSEND,'{'protocol':'NEC','data':'0xFF50AF','bits':32}'
+  elseif [action#color]=5
+    IRSEND,'{'protocol':'NEC','data':'0xFF30CF','bits':32}'
+  elseif [action#color]=6
+    IRSEND,'{'protocol':'NEC','data':'0xFFB04F','bits':32}'
+  elseif [action#color]=7
+    IRSEND,'{'protocol':'NEC','data':'0xFF708F','bits':32}'
+  elseif [action#color]=8
+    IRSEND,'{'protocol':'NEC','data':'0xFF08F7','bits':32}'
+  elseif [action#color]=9
+    IRSEND,'{'protocol':'NEC','data':'0xFF8877','bits':32}'
+  elseif [action#color]=10
+    IRSEND,'{'protocol':'NEC','data':'0xFF48B7','bits':32}'
+  elseif [action#color]=11
+    IRSEND,'{'protocol':'NEC','data':'0xFF28D7','bits':32}'
+  elseif [action#color]=12
+    IRSEND,'{'protocol':'NEC','data':'0xFFA857','bits':32}'
+  elseif [action#color]=13
+    IRSEND,'{'protocol':'NEC','data':'0xFF6897','bits':32}'
+  elseif [action#color]=14
+    IRSEND,'{'protocol':'NEC','data':'0xFF18E7','bits':32}'
+  elseif [action#color]=15
+    IRSEND,'{'protocol':'NEC','data':'0xFF9867','bits':32}'
+  elseif [action#color]=16
+    IRSEND,'{'protocol':'NEC','data':'0xFF58A7','bits':32}'
+  else
+    IRSEND,'{'protocol':'NEC','data':'0xFFC03F','bits':32}'
+  endif
+
+  if [action#color]<1 
+    TaskValueSet 3,2,1
+    Publish,"service/light_ball/power/color",1
+  elseif[action#color]>16
+    TaskValueSet 3,2,1
+    Publish,"service/light_ball/power/color",1
+  else
+    TaskValueSet 3,2,[action#color]
+    Publish,"service/light_ball/power/color",[action#color]
+  endif
+  timerSet,1,30
+endon

@@ -1,0 +1,55 @@
+on action#onoff=1 do
+ LogEntry,'XX MqttRecv onoff=1'
+
+ if [power#status]=0
+
+  GPIO,15,1
+  TaskValueSet 3,1,1
+  Publish,"service/light_ball/power/status",1
+
+  if [power#color]>0 and [power#color]<17
+
+          Pulse,13,0,50
+
+	  if [power#color]=1
+		IRSEND,'{'protocol':'NEC','data':'0xFFC03F','bits':32}'
+	  elseif [power#color]=2
+		IRSEND,'{'protocol':'NEC','data':'0xFF10EF','bits':32}'
+	  elseif [power#color]=3
+		IRSEND,'{'protocol':'NEC','data':'0xFF906F','bits':32}'
+	  elseif [power#color]=4
+		IRSEND,'{'protocol':'NEC','data':'0xFF50AF','bits':32}'
+	  elseif [power#color]=5
+		IRSEND,'{'protocol':'NEC','data':'0xFF30CF','bits':32}'
+	  elseif [power#color]=6
+		IRSEND,'{'protocol':'NEC','data':'0xFFB04F','bits':32}'
+	  elseif [power#color]=7
+		IRSEND,'{'protocol':'NEC','data':'0xFF708F','bits':32}'
+	  elseif [power#color]=8
+		IRSEND,'{'protocol':'NEC','data':'0xFF08F7','bits':32}'
+	  elseif [power#color]=9
+		IRSEND,'{'protocol':'NEC','data':'0xFF8877','bits':32}'
+	  elseif [power#color]=10
+		IRSEND,'{'protocol':'NEC','data':'0xFF48B7','bits':32}'
+	  elseif [power#color]=11
+		IRSEND,'{'protocol':'NEC','data':'0xFF28D7','bits':32}'
+	  elseif [power#color]=12
+		IRSEND,'{'protocol':'NEC','data':'0xFFA857','bits':32}'
+	  elseif [power#color]=13
+		IRSEND,'{'protocol':'NEC','data':'0xFF6897','bits':32}'
+	  elseif [power#color]=14
+		IRSEND,'{'protocol':'NEC','data':'0xFF18E7','bits':32}'
+	  elseif [power#color]=15
+		IRSEND,'{'protocol':'NEC','data':'0xFF9867','bits':32}'
+	  elseif [power#color]=16
+                IRSEND,'{'protocol':'NEC','data':'0xFF58A7','bits':32}'
+	  endif  
+
+          Publish,"service/light_ball/power/color",[power#color]
+
+
+  endif
+
+ endif
+ timerSet,1,30
+endon

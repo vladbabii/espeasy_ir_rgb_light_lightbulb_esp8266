@@ -1,0 +1,18 @@
+on System#Boot do
+  TaskValueSet 3,1,0
+  TaskValueSet 3,2,0
+endon
+
+on MQTT#Connected do
+  Publish,"service/light_ball/power/status",[power#status]
+  Publish,"service/light_ball/power/color",[power#color]
+  timerSet,1,30
+endon
+
+on action#onoff=0 do
+  LogEntry,'XX MqttRecvonoff=0'
+  GPIO,15,0
+  TaskValueSet 3,1,0
+  Publish,"service/light_ball/power/status",0
+  timerSet,1,30
+endon

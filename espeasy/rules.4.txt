@@ -1,0 +1,5 @@
+On Rules#Timer=1 do
+  Publish,"service/light_ball/power/status",[power#status]
+  Publish,"service/light_ball/power/color",[power#color]
+  timerSet,1,30
+endon
