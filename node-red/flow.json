@@ -1,0 +1,431 @@
+[
+    {
+        "id": "29d242ee576f2a15",
+        "type": "mqtt in",
+        "z": "64ae1b74effcaf3f",
+        "name": "",
+        "topic": "service/light_ball/power/status",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "7d1d54a0.1b507c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "9b0f7add606e6952"
+            ]
+        ]
+    },
+    {
+        "id": "d3feca04b2b88d06",
+        "type": "mqtt in",
+        "z": "64ae1b74effcaf3f",
+        "name": "",
+        "topic": "service/light_ball/power/color",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "7d1d54a0.1b507c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 360,
+        "wires": [
+            [
+                "3a2fd55315c34680"
+            ]
+        ]
+    },
+    {
+        "id": "9b0f7add606e6952",
+        "type": "change",
+        "z": "64ae1b74effcaf3f",
+        "name": "set flow status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "status",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "7082547ce03f5ea2"
+            ]
+        ]
+    },
+    {
+        "id": "3a2fd55315c34680",
+        "type": "change",
+        "z": "64ae1b74effcaf3f",
+        "name": "set flow color",
+        "rules": [
+            {
+                "t": "set",
+                "p": "color",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "7082547ce03f5ea2"
+            ]
+        ]
+    },
+    {
+        "id": "7082547ce03f5ea2",
+        "type": "function",
+        "z": "64ae1b74effcaf3f",
+        "name": "onchange event",
+        "func": "var msg={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 260,
+        "wires": [
+            [
+                "041f5344191f23ee"
+            ]
+        ]
+    },
+    {
+        "id": "041f5344191f23ee",
+        "type": "function",
+        "z": "64ae1b74effcaf3f",
+        "name": "full state",
+        "func": "var msg={};\n\ntry{\n  msg.color=flow.get(\"color\");\n}catch(e){\n    msg.color=\"0\";\n}\nif (typeof (msg.color) !== \"string\") {\n    msg.color = \"0\";\n}\n\ntry{\n    msg.status=flow.get(\"status\");\n}catch(e){\n    msg.status=\"0\";\n}\nif(typeof(msg.status)!==\"string\"){\n    msg.status=\"0\";\n}\n\nvar i;\nfor(i in msg){\n    msg[i]=parseInt(msg[i]);\n}\n\nif( msg.color>0){\n    var colors=flow.get(\"colors\");\n    for(i in colors){\n        if(colors[i][0]==msg.color){\n            msg.rgb=colors[i][1]+\",\"+colors[i][2]+\",\"+colors[i][3];\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [
+                "ea0506da6856b8b3",
+                "5481a7828239d991"
+            ]
+        ]
+    },
+    {
+        "id": "ea0506da6856b8b3",
+        "type": "debug",
+        "z": "64ae1b74effcaf3f",
+        "d": true,
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1a480be80e1a6214",
+        "type": "inject",
+        "z": "64ae1b74effcaf3f",
+        "name": "on start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "c5feddfebd33c558"
+            ]
+        ]
+    },
+    {
+        "id": "d10f35322327a165",
+        "type": "change",
+        "z": "64ae1b74effcaf3f",
+        "name": "set flow colors",
+        "rules": [
+            {
+                "t": "set",
+                "p": "colors",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5feddfebd33c558",
+        "type": "function",
+        "z": "64ae1b74effcaf3f",
+        "name": "color list",
+        "func": "msg.payload=[\n    [2, 221, 52, 38],\n    [3, 46, 118, 46],\n    [4, 12, 57, 125],\n    [1, 255, 255, 255],\n    [5, 215, 76, 53],\n    [6, 113, 154, 123],\n    [7, 105, 129, 167],\n    [8, 218, 91, 27],\n    [9, 4, 116, 136],\n    [10, 203, 132, 141],\n    [11, 212, 114, 41],\n    [12, 4, 128, 191],\n    [13, 208, 90, 122],\n    [14, 217, 155, 37],\n    [15, 1, 60, 152],\n    [16, 208, 57, 112],\n];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 60,
+        "wires": [
+            [
+                "d10f35322327a165"
+            ]
+        ]
+    },
+    {
+        "id": "5481a7828239d991",
+        "type": "function",
+        "z": "64ae1b74effcaf3f",
+        "name": "rgb generator",
+        "func": "if(typeof(msg.rgb)==\"string\"){\n    var old=msg;\n    var msg={\n        \"topic\": \"service/light_ball/power/rgb\",\n        \"payload\": msg.rgb\n    };\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 360,
+        "wires": [
+            [
+                "334c1a179968eb1a",
+                "cff9f01a12a9382e"
+            ]
+        ]
+    },
+    {
+        "id": "853df58b06e2eb46",
+        "type": "mqtt out",
+        "z": "64ae1b74effcaf3f",
+        "name": "",
+        "topic": "",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7d1d54a0.1b507c",
+        "x": 1290,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "334c1a179968eb1a",
+        "type": "rbe",
+        "z": "64ae1b74effcaf3f",
+        "name": "allow only changes",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 990,
+        "y": 360,
+        "wires": [
+            [
+                "853df58b06e2eb46",
+                "31bda4dd77d05d4a"
+            ]
+        ]
+    },
+    {
+        "id": "cff9f01a12a9382e",
+        "type": "debug",
+        "z": "64ae1b74effcaf3f",
+        "d": true,
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "31bda4dd77d05d4a",
+        "type": "debug",
+        "z": "64ae1b74effcaf3f",
+        "d": true,
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "9feb30771db557b0",
+        "type": "mqtt in",
+        "z": "64ae1b74effcaf3f",
+        "name": "",
+        "topic": "service/light_ball/action/rgb",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "7d1d54a0.1b507c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 680,
+        "wires": [
+            [
+                "9c02428dcd98a959",
+                "3753e0b3e00f58e4"
+            ]
+        ]
+    },
+    {
+        "id": "9c02428dcd98a959",
+        "type": "function",
+        "z": "64ae1b74effcaf3f",
+        "name": "set color",
+        "func": "var rgb=msg.payload.split(\",\");\n\nfunction get_closest_color(colors, [r2, g2, b2]) {\n    const [[closest_color_id]] = (\n        colors\n            .map(([id, r1, g1, b1]) => (\n                [id, Math.sqrt((r2 - r1) ** 2 + (g2 - g1) ** 2 + (b2 - b1) ** 2)]\n            ))\n            .sort(([, d1], [, d2]) => d1 - d2)\n    );\n    return colors.find(([id]) => id == closest_color_id);\n}\n\nif (rgb.length == 3) { \n    var colors = flow.get(\"colors\");\n    var id = get_closest_color(colors,rgb);\n    if(typeof(id[0])!==\"undefined\"){\n        var msg={\n            \"topic\": \"service/light_ball/action/color\",\n            \"payload\": id[0]\n        };\n        return msg;\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 680,
+        "wires": [
+            [
+                "86a877e5ffe56590",
+                "853df58b06e2eb46"
+            ]
+        ]
+    },
+    {
+        "id": "86a877e5ffe56590",
+        "type": "debug",
+        "z": "64ae1b74effcaf3f",
+        "d": true,
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3753e0b3e00f58e4",
+        "type": "debug",
+        "z": "64ae1b74effcaf3f",
+        "d": true,
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "7d1d54a0.1b507c",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "nodered",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "service/nodered-connection/status",
+        "birthQos": "1",
+        "birthRetain": "true",
+        "birthPayload": "online",
+        "birthMsg": {},
+        "closeTopic": "service/nodered-connection/status",
+        "closeQos": "1",
+        "closeRetain": "true",
+        "closePayload": "offline",
+        "closeMsg": {},
+        "willTopic": "service/nodered-connection/status",
+        "willQos": "1",
+        "willRetain": "true",
+        "willPayload": "offline",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
