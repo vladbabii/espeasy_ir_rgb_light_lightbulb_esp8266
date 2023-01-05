@@ -1,0 +1,32 @@
+color id,button,,irsend,,hex,,decimal,,,HEX Color,Hex,R,G,B,,R,G,B,,JS Array
+,,,,,,,,,,,,,,,,,,,,
+,brightness increase,,"IRSEND,'{'protocol':'NEC','data':'0xFF00FF','bits':32}'",,0xFF00FF,,16711935,,,,,,,,,,,,,
+,brightness decrease,,"IRSEND,'{'protocol':'NEC','data':'0xFF40BF','bits':32}'",,0xFF40BF,,16728255,,,,,,,,,,,,,
+,off,,"IRSEND,'{'protocol':'NEC','data':'0xFF609F','bits':32}'",,0xFF609F,,16736415,,,,,,,,,,,,,
+,on,,"IRSEND,'{'protocol':'NEC','data':'0xFFE01F','bits':32}'",,0xFFE01F,,16769055,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+1,White,,"IRSEND,'{'protocol':'NEC','data':'0xFFC03F','bits':32}'",,0xFFC03F,,16760895,,,#dfcdb7,dfcdb7,df,cd,b7,,223,205,183,,"[1,223,205,183],"
+2,Red,,"IRSEND,'{'protocol':'NEC','data':'0xFF10EF','bits':32}'",,0xFF10EF,,16716015,,,#dd3426,dd3426,dd,34,26,,221,52,38,,"[2,221,52,38],"
+3,Green,,"IRSEND,'{'protocol':'NEC','data':'0xFF906F','bits':32}'",,0xFF906F,,16748655,,,#2e762e,2e762e,2e,76,2e,,46,118,46,,"[3,46,118,46],"
+4,Blue,,"IRSEND,'{'protocol':'NEC','data':'0xFF50AF','bits':32}'",,0xFF50AF,,16732335,,,#0c397d,0c397d,0c,39,7d,,12,57,125,,"[4,12,57,125],"
+,,,,,,,,,,,,,,,,,,,,
+5,Dark Orange,,"IRSEND,'{'protocol':'NEC','data':'0xFF30CF','bits':32}'",,0xFF30CF,,16724175,,,#d74c35,d74c35,d7,4c,35,,215,76,53,,"[5,215,76,53],"
+6,Light Green,,"IRSEND,'{'protocol':'NEC','data':'0xFFB04F','bits':32}'",,0xFFB04F,,16756815,,,#719a7b,719a7b,71,9a,7b,,113,154,123,,"[6,113,154,123],"
+7,Navy Blue,,"IRSEND,'{'protocol':'NEC','data':'0xFF708F','bits':32}'",,0xFF708F,,16740495,,,#6981a7,6981a7,69,81,a7,,105,129,167,,"[7,105,129,167],"
+,,,,,,,,,,,,,,,,,,,,
+8,Light Orange,,"IRSEND,'{'protocol':'NEC','data':'0xFF08F7','bits':32}'",,0xFF08F7,,16713975,,,#da5b1b,da5b1b,da,5b,1b,,218,91,27,,"[8,218,91,27],"
+9,Teal,,"IRSEND,'{'protocol':'NEC','data':'0xFF8877','bits':32}'",,0xFF8877,,16746615,,,#047488,047488,04,74,88,,4,116,136,,"[9,4,116,136],"
+10,Light Purlple,,"IRSEND,'{'protocol':'NEC','data':'0xFF48B7','bits':32}'",,0xFF48B7,,16730295,,,#cb848d,cb848d,cb,84,8d,,203,132,141,,"[10,203,132,141],"
+,,,,,,,,,,,,,,,,,,,,
+11,Dark Yellow,,"IRSEND,'{'protocol':'NEC','data':'0xFF28D7','bits':32}'",,0xFF28D7,,16722135,,,#d47229,d47229,d4,72,29,,212,114,41,,"[11,212,114,41],"
+12,Light Blue,,"IRSEND,'{'protocol':'NEC','data':'0xFFA857','bits':32}'",,0xFFA857,,16754775,,,#0480bf,0480bf,04,80,bf,,4,128,191,,"[12,4,128,191],"
+13,Purple,,"IRSEND,'{'protocol':'NEC','data':'0xFF6897','bits':32}'",,0xFF6897,,16738455,,,#d05a7a,d05a7a,d0,5a,7a,,208,90,122,,"[13,208,90,122],"
+,,,,,,,,,,,,,,,,,,,,
+14,Yellow,,"IRSEND,'{'protocol':'NEC','data':'0xFF18E7','bits':32}'",,0xFF18E7,,16718055,,,#d99b25,d99b25,d9,9b,25,,217,155,37,,"[14,217,155,37],"
+15,Dark Blue,,"IRSEND,'{'protocol':'NEC','data':'0xFF9867','bits':32}'",,0xFF9867,,16750695,,,#013c98,013c98,01,3c,98,,1,60,152,,"[15,1,60,152],"
+16,Pink,,"IRSEND,'{'protocol':'NEC','data':'0xFF58A7','bits':32}'",,0xFF58A7,,16734375,,,#d03970,d03970,d0,39,70,,208,57,112,,"[16,208,57,112],"
+,,,,,,,,,,,,,,,,,,,,
+,Flash,,"IRSEND,'{'protocol':'NEC','data':'0xFFF00F','bits':32}'",,0xFFF00F,,16773135,,,,,,,,,,,,,
+,Strobe,,"IRSEND,'{'protocol':'NEC','data':'0xFFC837','bits':32}'",,0xFFC837,,16762935,,,,,,,,,,,,,
+,Smooth,,"IRSEND,'{'protocol':'NEC','data':'0xFFE817','bits':32}'",,0xFFE817,,16771095,,,,,,,,,,,,,
+,Mode,,"IRSEND,'{'protocol':'NEC','data':'0xFFD827','bits':32}'",,0xFFD827,,16767015,,,,,,,,,,,,,
